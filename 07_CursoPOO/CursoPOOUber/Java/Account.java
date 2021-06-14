@@ -1,4 +1,3 @@
-package CursoPOOUber.Java;
 
 class Account {
     Integer id;

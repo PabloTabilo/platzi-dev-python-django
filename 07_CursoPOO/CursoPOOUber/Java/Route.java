@@ -1,4 +1,3 @@
-package CursoPOOUber.Java;
 import java.util.ArrayList;
 
 public class Route {
