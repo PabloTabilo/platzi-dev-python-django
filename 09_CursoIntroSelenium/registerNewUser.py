@@ -15,6 +15,46 @@ class RegisterNewUser(unittest.TestCase):
         #el driver va a buscar el enlace por su texto y haga click
         driver.find_element_by_link_text('Log In').click()
 
+        create_account_button = driver.find_element_by_xpath('/html/body/div/div[2]/div[2]/div/div/div[2]/form/div/div[1]/div[2]/a/span/span')
+        # validamos boton visible y disponible
+        self.assertTrue(create_account_button.is_displayed() and create_account_button.is_enabled())
+        create_account_button.click()
+
+        # Comprobar que estamos en el sitio de crear cuenta
+        self.assertEqual("Create New Customer Account", driver.title)
+
+        # Creacion de variables con el nombre del selector correspondiente
+        first_name = driver.find_element_by_id('firstname')
+        last_name = driver.find_element_by_id('lastname')
+        email_address = driver.find_element_by_id('email_address')
+        password = driver.find_element_by_id('password')
+        confirm_password = driver.find_element_by_id('confirmation')
+        news_letter_subscription = driver.find_element_by_id('is_subscribed')
+        submit_button = driver.find_element_by_xpath('/html/body/div/div[2]/div[2]/div/div/div[2]/form/div[2]/button')
+
+        # Elementos habilitados
+        self.assertTrue(
+            first_name.is_enabled()
+            and last_name.is_enabled()
+            and email_address.is_enabled()
+            and password.is_enabled()
+            and confirm_password.is_enabled()
+            and news_letter_subscription.is_enabled()
+            and submit_button.is_enabled()
+            )
+
+        #mandamos los datos al formulario
+        first_name.send_keys('Test')
+        last_name.send_keys('Test')
+        email_address.send_keys('arqcftlothxuknlxkt@awdrt.com') #sacado de 10-minute mail
+        password.send_keys('Test')
+        confirm_password.send_keys('Test')
+        submit_button.click()
+
     # Cerrar ventanas y todas las pestañas
     def tearDown(self):
-        self.driver.quit()
+        self.driver.implicitly_wait(3)
+        self.driver.close()
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)
